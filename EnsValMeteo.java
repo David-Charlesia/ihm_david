@@ -67,10 +67,10 @@ public class EnsValMeteo extends java.util.ArrayList<ValMeteoJour>
   {
     try
     {
-      File f = new File(nomF);
-      if(f.exists() && !f.isDirectory())
+      File fi = new File(nomF);
+      if(fi.exists() && !fi.isDirectory())
       {
-        f.delete();
+        fi.delete();
       }
       Iterator<ValMeteoJour> i=this.iterator();
       ValMeteoJour v;
