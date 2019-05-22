@@ -13,23 +13,6 @@ public class VueStationMeteo extends JFrame
   private JTextArea zone;
   private EnsValMeteo valeur;
 
-
-  class BoutonListener implements ActionListener
-  {
-    public void actionPerformed(ActionEvent e)
-    {
-      if(e.getActionCommand()=="Charger")
-      {
-        valeur.charger("test_sauver.txt");
-        zone.setText(valeur.toString());
-      }
-      if(e.getActionCommand()=="Sauver")
-      {
-        valeur.sauver("test_bouton_sauver.txt");
-      }
-    }
-  }
-
   public JPanel getPanelSud()
   {
     JPanel jp=new JPanel();
@@ -49,25 +32,25 @@ public class VueStationMeteo extends JFrame
   public JPanel getPanelCentre()
   {
     JPanel jp=new JPanel();
-    jp.setLayout(null);
+    jp.setLayout(new GridLayout(1,1));
 
 
-    JTextArea zone=new JTextArea();
-    zone.setEditable(true);
-    zone.setLocation(0,0);
-    zone.setLineWrap(true);
+    this.zone=new JTextArea();
+    this.zone.setEditable(true);
+    this.zone.setLocation(0,0);
+    this.zone.setLineWrap(true);
 
     this.valeur = new EnsValMeteo();
     this.valeur.charger(this.fichier);
     String affichage=this.valeur.toString();
 
 
-    zone.append(affichage);
-    JScrollPane scroll=new JScrollPane(zone);
-    scroll.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-    scroll.setPreferredSize(new Dimension(130,130));
-    jp.add(zone);
-    jp.add(scroll);
+    this.zone.append(affichage);
+    //JScrollPane scroll=new JScrollPane(zone);
+    //scroll.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+    //scroll.setPreferredSize(new Dimension(130,130));
+    jp.add(this.zone);
+    //jp.add(scroll);
 
     return jp;
   }
@@ -104,7 +87,7 @@ public class VueStationMeteo extends JFrame
   {
 
     JFrame frame=new JFrame("");
-    JFileChooser dialogue=new JFileChooser(new File(".txt"));
+    JFileChooser dialogue=new JFileChooser(new File("."));
     int returnval=dialogue.showOpenDialog(this);
     if(returnval==JFileChooser.APPROVE_OPTION)
     {
@@ -141,5 +124,26 @@ public class VueStationMeteo extends JFrame
     VueStationMeteo Fenetre = new VueStationMeteo("Station Meteo",200,400,600,400);
 
 
+  }
+
+
+  class BoutonListener implements ActionListener
+  {
+    public void actionPerformed(ActionEvent e)
+    {
+      if(e.getActionCommand()=="Charger")
+      {
+        saisie2();
+        valeur=new EnsValMeteo();
+        valeur.charger(fichier);
+        String ch=valeur.toString();
+        System.out.println(ch);
+        zone.setText(ch);
+      }
+      if(e.getActionCommand()=="Sauver")
+      {
+        valeur.sauver("test_bouton_sauver.txt");
+      }
+    }
   }
 }
