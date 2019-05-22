@@ -12,6 +12,10 @@ public class VueStationMeteo extends JFrame
   private String fichier;
   private JTextArea zone;
   private EnsValMeteo valeur;
+  private JTextField JPlace;
+  private JTextField JSemaine;
+  private JTextField JTemperature;
+  private JTextField JPrecipitation;
 
   public JPanel getPanelSud()
   {
@@ -61,9 +65,12 @@ public class VueStationMeteo extends JFrame
     JPanel jp = new JPanel();
     jp.setLayout(new GridLayout(7,1));
     String[] semaine =  {"Lundi","Mardi","Mercredi","Jeudi","Vendredi","Samedi","Dimanche"};
+    BoutonListener blis=new BoutonListener();
+
     for (int i = 0; i<semaine.length; i++)
     {
       JButton bt = new JButton(semaine[i]);
+      bt.addActionListener(blis);
       jp.add(bt);
     }
 
@@ -75,10 +82,37 @@ public class VueStationMeteo extends JFrame
   {
     JPanel jp=new JPanel();
     String[] label={"Place","Semaine","Température","Précipitation"};
+
+    String tx="";
     for(int i=0;i<label.length;i++)
     {
-      jp.add(new JLabel(label[i]));
-      jp.add(new JTextField(5));
+      tx=label[i];
+      switch(tx)
+      {
+        case "Place":
+          jp.add(new JLabel(label[i]));
+          JPlace=new JTextField(5);
+          jp.add(JPlace);
+          break;
+
+        case "Semaine":
+          jp.add(new JLabel(label[i]));
+          JSemaine=new JTextField(5);
+          jp.add(JSemaine);
+          break;
+
+        case "Température":
+          jp.add(new JLabel(label[i]));
+          JTemperature=new JTextField(5);
+          jp.add(JTemperature);
+          break;
+
+        case "Précipitation":
+          jp.add(new JLabel(label[i]));
+          JPrecipitation=new JTextField(5);
+          jp.add(JPrecipitation);
+          break;
+      }
     }
     return jp;
   }
@@ -118,7 +152,6 @@ public class VueStationMeteo extends JFrame
     this.setVisible(true);
   }
 
-
   public static void main(String[] args)
   {
     VueStationMeteo Fenetre = new VueStationMeteo("Station Meteo",200,400,600,400);
@@ -131,19 +164,81 @@ public class VueStationMeteo extends JFrame
   {
     public void actionPerformed(ActionEvent e)
     {
-      if(e.getActionCommand()=="Charger")
+      String commande=e.getActionCommand();
+      ValMeteoJour vmj;
+      if(commande=="Charger")
       {
         saisie2();
         valeur=new EnsValMeteo();
         valeur.charger(fichier);
         String ch=valeur.toString();
-        System.out.println(ch);
         zone.setText(ch);
       }
-      if(e.getActionCommand()=="Sauver")
+      if(commande=="Sauver")
       {
         valeur.sauver("test_bouton_sauver.txt");
       }
+
+      switch(commande)
+      {
+        case "Lundi":
+          valeur=new EnsValMeteo(JPlace.getText(),JSemaine.getText());
+
+          vmj=new ValMeteoJour("Lundi",Float.parseFloat(JTemperature.getText()),Float.parseFloat(JPrecipitation.getText()));
+          valeur.add(vmj);
+          zone.setText(valeur.toString());
+          break;
+
+        case "Mardi":
+          valeur=new EnsValMeteo(JPlace.getText(),JSemaine.getText());
+
+          vmj=new ValMeteoJour("Mardi",Float.parseFloat(JTemperature.getText()),Float.parseFloat(JPrecipitation.getText()));
+          valeur.add(vmj);
+          zone.setText(valeur.toString());
+          break;
+
+        case "Mercredi":
+          valeur=new EnsValMeteo(JPlace.getText(),JSemaine.getText());
+
+          vmj=new ValMeteoJour("Mercredi",Float.parseFloat(JTemperature.getText()),Float.parseFloat(JPrecipitation.getText()));
+          valeur.add(vmj);
+          zone.setText(valeur.toString());
+          break;
+
+        case "Jeudi":
+          valeur=new EnsValMeteo(JPlace.getText(),JSemaine.getText());
+
+          vmj=new ValMeteoJour("Jeudi",Float.parseFloat(JTemperature.getText()),Float.parseFloat(JPrecipitation.getText()));
+          valeur.add(vmj);
+          zone.setText(valeur.toString());
+          break;
+
+        case "Vendredi":
+          valeur=new EnsValMeteo(JPlace.getText(),JSemaine.getText());
+
+          vmj=new ValMeteoJour("Vendredi",Float.parseFloat(JTemperature.getText()),Float.parseFloat(JPrecipitation.getText()));
+          valeur.add(vmj);
+          zone.setText(valeur.toString());
+          break;
+
+        case "Samedi":
+          valeur=new EnsValMeteo(JPlace.getText(),JSemaine.getText());
+
+          vmj=new ValMeteoJour("Samedi",Float.parseFloat(JTemperature.getText()),Float.parseFloat(JPrecipitation.getText()));
+          valeur.add(vmj);
+          zone.setText(valeur.toString());
+          break;
+
+        case "Dimanche":
+          valeur=new EnsValMeteo(JPlace.getText(),JSemaine.getText());
+
+          vmj=new ValMeteoJour("Dimanche",Float.parseFloat(JTemperature.getText()),Float.parseFloat(JPrecipitation.getText()));
+          valeur.add(vmj);
+          zone.setText(valeur.toString());
+          break;
+      }
+
+
     }
   }
 }

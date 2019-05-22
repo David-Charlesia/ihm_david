@@ -12,6 +12,22 @@ public class EnsValMeteo extends java.util.ArrayList<ValMeteoJour>
 
   EnsValMeteo(){}
 
+  EnsValMeteo(String ville, String numSemaine)
+  {
+    this.ville=ville;
+    this.numSemaine=numSemaine;
+  }
+
+  public void setVille(String ville)
+  {
+    this.ville=ville;
+  }
+
+  public void setNumSemaine(String numSemaine)
+  {
+    this.numSemaine=numSemaine;
+  }
+
   public void charger(String nomF)
   {
     String jour;
