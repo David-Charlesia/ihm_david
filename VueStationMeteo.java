@@ -16,6 +16,8 @@ public class VueStationMeteo extends JFrame
   private JTextField JSemaine;
   private JTextField JTemperature;
   private JTextField JPrecipitation;
+  private Object[] chiffres=new Object[52];
+  JComboBox<Object> compteur;
 
   public JPanel getPanelSud()
   {
@@ -80,6 +82,7 @@ public class VueStationMeteo extends JFrame
 
   public JPanel getPanelNord()
   {
+    System.out.println("Nord");
     JPanel jp=new JPanel();
     String[] label={"Place","Semaine","Température","Précipitation"};
 
@@ -96,9 +99,14 @@ public class VueStationMeteo extends JFrame
           break;
 
         case "Semaine":
-          jp.add(new JLabel(label[i]));
-          JSemaine=new JTextField(5);
-          jp.add(JSemaine);
+          for(int j=1;j<53;j++)
+          {
+            chiffres[j-1]=new String(""+j);
+          }
+
+          compteur=new JComboBox<Object>(chiffres);
+          jp.add(compteur);
+
           break;
 
         case "Température":
@@ -182,7 +190,7 @@ public class VueStationMeteo extends JFrame
       switch(commande)
       {
         case "Lundi":
-          valeur=new EnsValMeteo(JPlace.getText(),JSemaine.getText());
+          valeur=new EnsValMeteo(JPlace.getText(),compteur.getSelectedItem().toString());
 
           vmj=new ValMeteoJour("Lundi",Float.parseFloat(JTemperature.getText()),Float.parseFloat(JPrecipitation.getText()));
           valeur.add(vmj);
@@ -190,7 +198,7 @@ public class VueStationMeteo extends JFrame
           break;
 
         case "Mardi":
-          valeur=new EnsValMeteo(JPlace.getText(),JSemaine.getText());
+          valeur=new EnsValMeteo(JPlace.getText(),compteur.getSelectedItem().toString());
 
           vmj=new ValMeteoJour("Mardi",Float.parseFloat(JTemperature.getText()),Float.parseFloat(JPrecipitation.getText()));
           valeur.add(vmj);
@@ -198,7 +206,7 @@ public class VueStationMeteo extends JFrame
           break;
 
         case "Mercredi":
-          valeur=new EnsValMeteo(JPlace.getText(),JSemaine.getText());
+          valeur=new EnsValMeteo(JPlace.getText(),compteur.getSelectedItem().toString());
 
           vmj=new ValMeteoJour("Mercredi",Float.parseFloat(JTemperature.getText()),Float.parseFloat(JPrecipitation.getText()));
           valeur.add(vmj);
@@ -206,7 +214,7 @@ public class VueStationMeteo extends JFrame
           break;
 
         case "Jeudi":
-          valeur=new EnsValMeteo(JPlace.getText(),JSemaine.getText());
+          valeur=new EnsValMeteo(JPlace.getText(),compteur.getSelectedItem().toString());
 
           vmj=new ValMeteoJour("Jeudi",Float.parseFloat(JTemperature.getText()),Float.parseFloat(JPrecipitation.getText()));
           valeur.add(vmj);
@@ -214,7 +222,7 @@ public class VueStationMeteo extends JFrame
           break;
 
         case "Vendredi":
-          valeur=new EnsValMeteo(JPlace.getText(),JSemaine.getText());
+          valeur=new EnsValMeteo(JPlace.getText(),compteur.getSelectedItem().toString());
 
           vmj=new ValMeteoJour("Vendredi",Float.parseFloat(JTemperature.getText()),Float.parseFloat(JPrecipitation.getText()));
           valeur.add(vmj);
@@ -222,7 +230,7 @@ public class VueStationMeteo extends JFrame
           break;
 
         case "Samedi":
-          valeur=new EnsValMeteo(JPlace.getText(),JSemaine.getText());
+          valeur=new EnsValMeteo(JPlace.getText(),compteur.getSelectedItem().toString());
 
           vmj=new ValMeteoJour("Samedi",Float.parseFloat(JTemperature.getText()),Float.parseFloat(JPrecipitation.getText()));
           valeur.add(vmj);
@@ -230,7 +238,7 @@ public class VueStationMeteo extends JFrame
           break;
 
         case "Dimanche":
-          valeur=new EnsValMeteo(JPlace.getText(),JSemaine.getText());
+          valeur=new EnsValMeteo(JPlace.getText(),compteur.getSelectedItem().toString());
 
           vmj=new ValMeteoJour("Dimanche",Float.parseFloat(JTemperature.getText()),Float.parseFloat(JPrecipitation.getText()));
           valeur.add(vmj);

@@ -4,6 +4,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.*;
+import java.io.File;
 
 public class EnsValMeteo extends java.util.ArrayList<ValMeteoJour>
 {
@@ -66,6 +67,11 @@ public class EnsValMeteo extends java.util.ArrayList<ValMeteoJour>
   {
     try
     {
+      File f = new File(nomF);
+      if(f.exists() && !f.isDirectory())
+      {
+        f.delete();
+      }
       Iterator<ValMeteoJour> i=this.iterator();
       ValMeteoJour v;
       BufferedWriter f = new BufferedWriter(new FileWriter(nomF,true));
