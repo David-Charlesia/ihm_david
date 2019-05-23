@@ -54,6 +54,6 @@ public class ValMeteoJour
 
 	public String toString()
 	{
-		return "jour=" + jour + ", prec=" + prec + ", temp=" + temp;
+		return "Jour :" + jour + ", Temp :" + temp + ", Prec :" + prec ;
 	}
 }

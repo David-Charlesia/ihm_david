@@ -113,7 +113,7 @@ public class EnsValMeteo extends java.util.ArrayList<ValMeteoJour>
 
 
 
-  public String toString()
+  /*public String toString()
   {
     String affichage="";
 
@@ -126,7 +126,18 @@ public class EnsValMeteo extends java.util.ArrayList<ValMeteoJour>
     }
 
     return affichage;
-  }
+  }*/
+
+  public String toString()
+		{
+			String s = "Lieu :" + this.ville + ", Semaine :"+ this.numSemaine + "\n";
+			Iterator<ValMeteoJour> ite = this.iterator();
+			while(ite.hasNext())
+			{
+				s += ite.next() + "\n";
+			}
+			return s;
+}
 
   public static void main(String[] args)
   {

@@ -272,8 +272,37 @@ public class VueStationMeteo extends JFrame
 
         case "Supprimer":
           String ligne=zone.getSelectedText();
-          
 
+          StringTokenizer st = new StringTokenizer(ligne,":");// coupe la ligne en 4 grace a mes 3 ":"
+          StringTokenizer st1;
+          String jour;
+          float temp;
+          float prec;
+          st.nextToken();
+          st1 = new StringTokenizer(st.nextToken(),",");// recuperer juste le jour
+          jour = st1.nextToken().trim();
+          st1 = new StringTokenizer(st.nextToken(),",");// recuperer juste la temp
+          temp = Float.parseFloat(st1.nextToken());
+          prec = Float.parseFloat(st.nextToken());// recuperer juste la prec dans le reste
+          ValMeteoJour vmj2 = new ValMeteoJour(jour, temp, prec);
+
+
+          Iterator<ValMeteoJour> ite = valeur.iterator();
+          boolean pasTrouve = true;
+          int index = 0;
+          while(ite.hasNext() && pasTrouve)
+          {
+              ValMeteoJour v = new ValMeteoJour(ite.next());
+              if(vmj2.equals(v))
+              {
+                valeur.remove(index);
+                pasTrouve = false;
+              }
+              index++;
+          }
+          String s = valeur.toString();
+          System.out.println(valeur.toString());
+          zone.setText(s);
 
           break;
 
