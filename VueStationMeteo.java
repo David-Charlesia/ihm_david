@@ -10,6 +10,7 @@ public class VueStationMeteo extends JFrame
   private JButton charger;
   private JButton sauver;
   private JButton[] jours;
+  private JButton supprime;
   private String fichier;
   private JTextArea zone;
   private EnsValMeteo valeur;
@@ -25,13 +26,17 @@ public class VueStationMeteo extends JFrame
     JPanel jp=new JPanel();
     charger=new JButton("Charger");
     sauver=new JButton("Sauver");
+    supprime=new JButton("Supprimer");
 
     BoutonListener blis=new BoutonListener();
     charger.addActionListener(blis);
     sauver.addActionListener(blis);
+    supprime.addActionListener(blis);
+
 
     jp.add(charger);
     jp.add(sauver);
+    jp.add(supprime);
     return jp;
   }
 
@@ -173,9 +178,10 @@ public class VueStationMeteo extends JFrame
     JFrame parentFrame = new JFrame();
 
     JFileChooser fileChooser = new JFileChooser();
+    fileChooser.setCurrentDirectory(new File("."));
     fileChooser.setDialogTitle("Sauvgarder");
 
-    int userSelection = fileChooser.showSaveDialog(parentFrame);
+    int userSelection = fileChooser.showSaveDialog(this);
 
     if (userSelection == JFileChooser.APPROVE_OPTION)
     {
@@ -264,7 +270,10 @@ public class VueStationMeteo extends JFrame
           zone.setText(valeur.toString());
           break;
 
+        case "Supprimer":
 
+
+          break;
 
 
       }
