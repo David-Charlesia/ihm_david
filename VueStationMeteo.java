@@ -3,6 +3,7 @@ import java.awt.*;
 import java.util.*;
 import java.io.*;
 import java.awt.event.*;
+import javax.swing.JOptionPane;
 
 public class VueStationMeteo extends JFrame
 {
@@ -167,6 +168,23 @@ public class VueStationMeteo extends JFrame
 
   }
 
+  public void getSauverPanel()
+  {
+    JFrame parentFrame = new JFrame();
+
+    JFileChooser fileChooser = new JFileChooser();
+    fileChooser.setDialogTitle("Sauvgarder");
+
+    int userSelection = fileChooser.showSaveDialog(parentFrame);
+
+    if (userSelection == JFileChooser.APPROVE_OPTION)
+    {
+      File fileToSave = fileChooser.getSelectedFile();
+      valeur.sauver((String)fileToSave.getAbsolutePath());
+    }
+  }
+
+
 
   class BoutonListener implements ActionListener
   {
@@ -184,7 +202,8 @@ public class VueStationMeteo extends JFrame
       }
       if(commande=="Sauver")
       {
-        valeur.sauver("test_bouton_sauver.txt");
+        getSauverPanel();
+        //valeur.sauver("test_bouton_sauver.txt");
       }
 
       switch(commande)
@@ -244,6 +263,10 @@ public class VueStationMeteo extends JFrame
           valeur.add(vmj);
           zone.setText(valeur.toString());
           break;
+
+
+
+
       }
 
 
